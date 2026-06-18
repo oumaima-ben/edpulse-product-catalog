@@ -1,0 +1,13 @@
+{
+  "name": "edpulse",
+  "private": true,
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "build": "cd frontend && npm install && VITE_API_URL= npm run build && cd .. && rm -rf backend/public && cp -r frontend/dist backend/public && cd backend && npm install && npm run build",
+    "start": "npm run start:prod --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend"
+  }
+}

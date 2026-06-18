@@ -4,3 +4,5 @@ dist
 *.log
 *.pdf
 .DS_Store
+backend/public/*
+!backend/public/.gitkeep

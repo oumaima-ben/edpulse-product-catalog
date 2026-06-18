@@ -3,6 +3,7 @@ import type { ProductsQuery, ProductsResponse } from '../types/product';
 
 function resolveApiUrl(): string {
   const raw = import.meta.env.VITE_API_URL;
+  if (raw === '') return '';
   if (!raw) return 'http://localhost:3000';
   if (raw.startsWith('http')) return raw.replace(/\/$/, '');
   return `https://${raw.replace(/\/$/, '')}`;

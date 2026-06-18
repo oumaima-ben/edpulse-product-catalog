@@ -122,31 +122,38 @@ cd backend && npm test
 cd backend && npm run test:e2e
 ```
 
-## Deployment (Render)
+## Deployment
 
-A `render.yaml` blueprint is included for one-click deployment:
+### Live (Railway)
 
-1. Push this repository to GitHub.
-2. Create a new **Blueprint** on [Render](https://render.com) and connect the repo.
-3. Render will provision:
-   - **edpulse-api** — NestJS backend (Web Service)
-   - **edpulse-frontend** — React static site
+- **App URL:** https://edpulse-product-catalog-production.up.railway.app
+- **API:** https://edpulse-product-catalog-production.up.railway.app/products
+- **GitHub:** https://github.com/oumaima-ben/edpulse-product-catalog
 
-After deployment, set `VITE_API_URL` on the frontend service to the backend URL (e.g. `https://edpulse-api.onrender.com`).
+The production build serves the React frontend and NestJS API from a single service (API at `/products`, UI at `/`).
 
-### Manual deployment
+### Railway (recommended — no credit card required for trial)
 
-**Backend (Web Service):**
-- Build command: `cd backend && npm install && npm run build`
-- Start command: `cd backend && npm run start:prod`
-- Environment: `PORT=3000`, `CORS_ORIGIN=https://your-frontend-url.onrender.com`
+```bash
+# Install CLI and login
+npm install -g @railway/cli
+railway login
 
-**Frontend (Static Site):**
-- Build command: `cd frontend && npm install && npm run build`
-- Publish directory: `frontend/dist`
-- Environment: `VITE_API_URL=https://your-backend-url.onrender.com`
+# Deploy from project root
+railway up --service edpulse-product-catalog
+```
 
-## Features Checklist
+Configuration is in `railway.toml` and `nixpacks.toml` (Node 20).
+
+### Render (requires payment method on file, even for free tier)
+
+A `render.yaml` blueprint is included. After adding a card at https://dashboard.render.com/billing:
+
+1. Push this repository to GitHub
+2. In Render Dashboard → **New** → **Blueprint**
+3. Connect the repo and click **Deploy Blueprint**
+
+### Local Development
 
 - [x] `GET /products` with pagination (`page`, `limit`)
 - [x] Filter by category OR stock status
